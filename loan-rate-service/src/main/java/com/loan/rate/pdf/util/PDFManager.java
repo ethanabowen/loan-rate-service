@@ -1,4 +1,4 @@
-package com.loan.rate.util;
+package com.loan.rate.pdf.util;
 
 import java.io.File;
 import java.io.IOException;

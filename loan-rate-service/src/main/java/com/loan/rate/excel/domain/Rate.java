@@ -1,4 +1,4 @@
-package com.loan.rate.domain;
+package com.loan.rate.excel.domain;
 
 import java.math.BigDecimal;
 
@@ -9,8 +9,8 @@ public class Rate {
 
 	BigDecimal rate;
 	
-	public Rate(String rate) {
-		this.rate = new BigDecimal(rate);
+	public Rate(BigDecimal rate) {
+		this.rate = rate;
 	}
 
 	@Override

@@ -7,10 +7,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import com.loan.rate.domain.CaliberRateTable;
-import com.loan.rate.domain.LockDate;
-import com.loan.rate.domain.Rate;
-import com.loan.rate.domain.Rebate;
+import com.loan.rate.pdf.domain.CaliberRateTable;
+import com.loan.rate.pdf.domain.LockDate;
+import com.loan.rate.pdf.domain.Rate;
+import com.loan.rate.pdf.domain.Rebate;
 
 public class CaliberRateFactory {
 

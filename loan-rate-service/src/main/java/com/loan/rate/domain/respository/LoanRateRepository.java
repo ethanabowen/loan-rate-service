@@ -4,12 +4,12 @@ import java.util.List;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import com.loan.rate.domain.Article;
+import com.loan.rate.pdf.domain.Article;
 
-public interface LoanRateRepository extends MongoRepository<Article, String> {
+public interface LoanRateRepository extends MongoRepository<LoanRate, String> {
 
 	@Override
-    public List<Article> findAll();
+    public List<LoanRate> findAll();
 	
 //	public List<Article> readAll() {
 //

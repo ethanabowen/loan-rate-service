@@ -1,4 +1,4 @@
-package com.loan.rate.util;
+package com.loan.rate.pdf.util;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -9,8 +9,8 @@ import java.util.List;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 
-import com.loan.rate.domain.CaliberRateTable;
 import com.loan.rate.domain.factory.CaliberRateFactory;
+import com.loan.rate.pdf.domain.CaliberRateTable;
 
 public class PDFReader {
 

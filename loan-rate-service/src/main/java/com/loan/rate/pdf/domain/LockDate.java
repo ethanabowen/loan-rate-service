@@ -1,4 +1,4 @@
-package com.loan.rate.domain;
+package com.loan.rate.pdf.domain;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

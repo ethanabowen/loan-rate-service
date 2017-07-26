@@ -1,4 +1,4 @@
-package com.loan.rate.domain;
+package com.loan.rate.pdf.domain;
 
 import java.util.ArrayList;
 import java.util.HashMap;

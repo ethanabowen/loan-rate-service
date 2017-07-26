@@ -1,4 +1,4 @@
-package com.loan.rate.domain;
+package com.loan.rate.excel.domain;
 
 import java.math.BigDecimal;
 
@@ -8,8 +8,6 @@ import lombok.Data;
 public class Rebate {
 
 	BigDecimal rebate;
+	LockDate lockDate;
 	
-	public Rebate(String rebate) {
-		this.rebate = new BigDecimal(rebate);
-	}
 }

@@ -2,7 +2,7 @@ package com.loan.rate.rest.factory;
 
 import org.springframework.stereotype.Component;
 
-import com.loan.rate.domain.Country;
+import com.loan.rate.pdf.domain.Country;
 import com.loan.rate.rest.contract.LoanRateResponse;
 
 @Component
