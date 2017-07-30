@@ -1,32 +1,8 @@
 server: 
   port: 9000
-
-spring:
-  data:
-    mongodb:
-      url: mongodb://127.0.0.1:27017
-      database: local
-       
-  datasource: 
-    driverClassName: 
-    url: jdbc:sqlserver://fsdb-productmaster.pier1.com;databasename=Product_Master
-    username: 
-    password: 
-    testWhileIdle: true
-    validationQuery: 'SELECT 1'
-
-  jpa: 
-    show-sql: false
-    hibernate: 
-      naming:
-        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-    properties: 
-      hibernate: 
-        dialect: org.hibernate.dialect.SQLServer2008Dialect
-        current_session_context_class: org.springframework.orm.hibernate5.SpringSessionContext
-
+  
 health:
-  name: 'Article Service'
+  name: 'Loan Rate Service'
   db: true
   
 # Cors/Health
