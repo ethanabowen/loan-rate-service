@@ -6,8 +6,6 @@ import lombok.Data;
 
 @Data
 public class Rebate {
-
 	BigDecimal rebate;
-	LockDate lockDate;
 	
 }

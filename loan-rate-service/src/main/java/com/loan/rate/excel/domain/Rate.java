@@ -9,12 +9,4 @@ public class Rate {
 
 	BigDecimal rate;
 	
-	public Rate(BigDecimal rate) {
-		this.rate = rate;
-	}
-
-	@Override
-	public int hashCode() {
-		return rate.intValue();
-	}
 }
