@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 public class Rate {
-
-	BigDecimal rate;
+	
+	private BigDecimal rate;
 	
 }

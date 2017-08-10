@@ -10,7 +10,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,9 +17,8 @@ import java.util.stream.Stream;
 
 import org.springframework.stereotype.Component;
 
-import com.loan.rate.excel.domain.LockDate;
 import com.loan.rate.excel.domain.Rate;
-import com.loan.rate.excel.domain.Rebate;
+import com.loan.rate.excel.domain.RatesAndRebates;
 import com.loan.rate.excel.domain.Report;
 
 @Component
@@ -55,7 +53,7 @@ public class ExcelService {
 					rateSheetDate = new Date(dateLine.substring(dateIndex, dateIndex + 10));
 				}*/
 				
-				List<LockDate> lockDates = null;
+				List<Integer> lockDates = null;
 				List<String[]> reportLines = new ArrayList<>();
 				while ((line = br.readLine()) != null) {
 
@@ -67,15 +65,16 @@ public class ExcelService {
 						if (headerLineValues.get(0).toLowerCase().equals("ratesheet name")) {
 							lockDates = new ArrayList<>();
 							for (int i = 3; i < headerLineValues.size(); i++) {
-								LockDate lockDate = new LockDate();
+//								LockDate lockDate = new LockDate();
 								String dayStr = headerLineValues.get(i);
-								lockDate.setDaysOut(Integer.parseInt(dayStr.substring(0, dayStr.indexOf(" "))));
+//								lockDate.setDaysOut(Integer.parseInt(dayStr.substring(0, dayStr.indexOf(" "))));
+								
+//								Calendar cal = Calendar.getInstance();
+//								// cal.setTime(Calendar.getInstance().getTime());
+//								cal.add(Calendar.DATE, lockDate.getDaysOut());
+//								lockDate.setDate(cal.getTime().toString());
 
-								Calendar cal = Calendar.getInstance();
-								// cal.setTime(Calendar.getInstance().getTime());
-								cal.add(Calendar.DATE, lockDate.getDaysOut());
-								lockDate.setDate(cal.getTime().toString());
-
+								Integer lockDate = Integer.parseInt(dayStr.substring(0, dayStr.indexOf(" ")));
 								lockDates.add(lockDate);
 							}
 							continue;
@@ -103,7 +102,7 @@ public class ExcelService {
 							reportLines.add(line.split(CSV_DELIMITER));
 						}
 
-						Map<LockDate, Map<Rate, Rebate>> reportValues = parseReportValuesFromCSV(lockDates,
+						Map<Integer, List<RatesAndRebates>> reportValues = parseReportValuesFromCSV(lockDates,
 								reportLines);
 						report.setValues(reportValues);
 
@@ -136,10 +135,10 @@ public class ExcelService {
 		}
 	}
 
-	private Map<LockDate, Map<Rate, Rebate>> parseReportValuesFromCSV(List<LockDate> lockDates,
+	private Map<Integer, List<RatesAndRebates>> parseReportValuesFromCSV(List<Integer> lockDates,
 			List<String[]> reportLines) {
 
-		Map<LockDate, Map<Rate, Rebate>> report = new HashMap<LockDate, Map<Rate, Rebate>>();
+		Map<Integer, List<RatesAndRebates>> report = new HashMap<Integer, List<RatesAndRebates>>();
 
 		//@formatter:off
 		// [Dallas Wholesale - Borrower Paid, Conforming Fixed 15 (CF15), 2.750, 0.662, 0.740, 0.818, 0.901, , 1.276],
@@ -152,7 +151,7 @@ public class ExcelService {
 		// [Dallas Wholesale - Borrower Paid, Conforming Fixed 15 (CF15), 3.500, -2.487, -2.437, -2.374, -2.308, , -1.933],
 		// [Dallas Wholesale - Borrower Paid, Conforming Fixed 15 (CF15), 4.125, -4.269, -4.219, -4.157, -4.090, , -3.715],
 		//@formatter:on
-
+		
 		for (String[] reportLine : reportLines) {
 
 			Rate rate = new Rate();
@@ -162,23 +161,24 @@ public class ExcelService {
 					continue;
 				}
 
-				Rebate rebate = new Rebate();
+				RatesAndRebates coor = new RatesAndRebates();
+				coor.setRate(rate.getRate());
+				
 				String rebateStr = reportLine[i];
 				if (rebateStr.trim().length() > 0) {
-					rebate.setRebate(new BigDecimal(rebateStr));
+					coor.setRebate(new BigDecimal(rebateStr));
 				} else {
-					rebate.setRebate(null);
+					coor.setRebate(null);
 				}
 
 				if (!report.containsKey(lockDates.get(i - 3))) {
-					Map<Rate, Rebate> rateRebate = new HashMap<>();
-					rateRebate.put(rate, rebate);
+					List<RatesAndRebates> rateRebate = new ArrayList<>();
+					rateRebate.add(coor);
 					report.put(lockDates.get(i - 3), rateRebate);
 				} else {
-					report.get(lockDates.get(i - 3)).put(rate, rebate);
+					report.get(lockDates.get(i - 3)).add(coor);
 				}
 			}
-
 		}
 		return report;
 	}

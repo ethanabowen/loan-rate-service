@@ -1,18 +1,15 @@
 package com.loan.rate.excel.domain;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@JsonAutoDetect(fieldVisibility = Visibility.ANY)
 public class LockDate {
-
-	String date;
-	Integer daysOut;
-
-	public LockDate(Integer daysOut, String date) {
-		this.date = date;
-		this.daysOut = daysOut;
-	}
+	private Integer daysOut;
 	
 }

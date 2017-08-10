@@ -5,7 +5,9 @@ import java.math.BigDecimal;
 import lombok.Data;
 
 @Data
-public class Rebate {
-	BigDecimal rebate;
+public class RatesAndRebates {
+	
+	private BigDecimal rate;
+	private BigDecimal rebate;
 	
 }
